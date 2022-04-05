@@ -45,25 +45,38 @@ public class RestApiController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
-  @RequestMapping(value = "/deleteDoctor", method = RequestMethod.POST)
-  public ResponseEntity<?> deleteDoctor(@RequestBody Integer[] doctorId, UriComponentsBuilder ucBuilder) {
-      System.out.println("In Rest API Controller");
-    doctorService.removeDoctor(doctorId);
+    @RequestMapping(value = "/deleteDoctor", method = RequestMethod.POST)
+    public ResponseEntity<?> deleteDoctor(@RequestBody Integer[] doctorId, UriComponentsBuilder ucBuilder) {
+        System.out.println("In Rest API Controller");
+        doctorService.removeDoctor(doctorId);
+
+        HttpHeaders headers = new HttpHeaders();
+  //    headers.setLocation(ucBuilder.path("/api/deleteDoctor/{id}").buildAndExpand(specialist.getId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
+      @RequestMapping(value = "/viewDoctor", method = RequestMethod.GET)
+      public  ResponseEntity<List<Doctor>> getAllDoctors() {
+          System.out.println("Inside /viewProfessional");
+          List<Doctor> doctors = doctorService.findDoctors();
+          return new ResponseEntity<List<Doctor>>(doctors, HttpStatus.OK);
+      }
+
+  @RequestMapping(value = "/deleteSpecialist", method = RequestMethod.POST)
+  public ResponseEntity<?> deleteSpecialist(@RequestBody Integer[] specialistId, UriComponentsBuilder ucBuilder) {
+    System.out.println("In Rest API Controller");
+    specialistService.removeSpecialist(specialistId);
 
     HttpHeaders headers = new HttpHeaders();
-//    headers.setLocation(ucBuilder.path("/api/deleteDoctor/{id}").buildAndExpand(specialist.getId()).toUri());
+    //    headers.setLocation(ucBuilder.path("/api/deleteDoctor/{id}").buildAndExpand(specialist.getId()).toUri());
     return new ResponseEntity<String>(headers, HttpStatus.CREATED);
   }
 
-//  @RequestMapping(value = "/deleteDoctor", method = RequestMethod.GET)
-//    public void deleteDoctor(@RequestParam("doctorId") Integer[] doctorId) {
-//        doctorService.removeDoctor(doctorId);
-//    }
+  @RequestMapping(value = "/viewSpecialist", method = RequestMethod.GET)
+  public  ResponseEntity<List<Specialist>> getAllSpecialists() {
+    System.out.println("Inside /viewProfessional");
+    List<Specialist> specialists = specialistService.findSpecialists();
+    return new ResponseEntity<List<Specialist>>(specialists, HttpStatus.OK);
+  }
 
-    @RequestMapping(value = "/viewProfessional", method = RequestMethod.GET)
-    public  ResponseEntity<List<Doctor>> getAllDoctors() {
-        System.out.println("Inside /viewProfessional");
-        List<Doctor> doctors = doctorService.findDoctors();
-        return new ResponseEntity<List<Doctor>>(doctors, HttpStatus.OK);
-    }
 }

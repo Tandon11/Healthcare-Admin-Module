@@ -10,7 +10,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { WelcomeComponent } from './welcome/welcome.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { SpecialistComponent } from './specialist/specialist.component';
-import { ViewProfessionalsComponent } from './view-professionals/view-professionals.component';
+import { ViewDoctorComponent } from './view-doctor/view-doctor.component';
+import { ViewSpecialistComponent } from './view-specialist/view-specialist.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ViewProfessionalsComponent } from './view-professionals/view-profession
     WelcomeComponent,
     DoctorComponent,
     SpecialistComponent,
-    ViewProfessionalsComponent,
+    ViewDoctorComponent,
+    ViewSpecialistComponent,
   ],
   imports: [
     BrowserModule,

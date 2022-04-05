@@ -18,22 +18,22 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor = "let doc of doctor">
-            <td><input type = "checkbox" name = "id" id = {{doc.id}} (change)="pushDocId(doc.id)"/></td>
-            <td>{{doc.id}}</td>
-            <td>{{doc.fname}}</td>
-            <td>{{doc.lname}}</td>
-            <td>{{doc.username}}</td>
-            <td>{{doc.password}}</td>
-            <td>{{doc.gender}}</td>
-            <td>{{doc.highest_qual}}</td>
-            <td>{{doc.contact_no}}</td>
-            <td>{{doc.is_Avail}}</td>
+          <tr *ngFor = "let spec of specialist">
+            <td><input type = "checkbox" name = "id" id = {{spec.id}} (change)="pushSpecId(spec.id)"/></td>
+            <td>{{spec.id}}</td>
+            <td>{{spec.fname}}</td>
+            <td>{{spec.lname}}</td>
+            <td>{{spec.username}}</td>
+            <td>{{spec.password}}</td>
+            <td>{{spec.gender}}</td>
+            <td>{{spec.highest_qual}}</td>
+            <td>{{spec.contact_no}}</td>
+            <td>{{spec.is_Avail}}</td>
           </tr>
           </tbody>
         </table>
 
-        <button (click)="submitResponses()" class="btn btn-success"> Submit </button>
+        <button (click) = "submitResponses()" class = "btn btn-success"> Delete Selected </button>
       </div>
     </div>
   </div>

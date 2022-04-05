@@ -1,0 +1,41 @@
+ <form>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table" style="text-align: center">
+            <thead>
+            <tr>
+              <th scope="col">Remove</th>
+              <th scope="col">Id</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Username</th>
+              <th scope="col">Password</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Highest Qualification</th>
+              <th scope="col">Contact Number</th>
+              <th scope="col">Availiablity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor = "let doc of doctor">
+              <td><input type = "checkbox" name = "id" id = {{doc.id}} (change)="pushDocId(doc.id)"/></td>
+              <td>{{doc.id}}</td>
+              <td>{{doc.fname}}</td>
+              <td>{{doc.lname}}</td>
+              <td>{{doc.username}}</td>
+              <td>{{doc.password}}</td>
+              <td>{{doc.gender}}</td>
+              <td>{{doc.highest_qual}}</td>
+              <td>{{doc.contact_no}}</td>
+              <td>{{doc.is_Avail}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <button (click) = "submitResponses()" class = "btn btn-success"> Delete Selected </button>
+        </div>
+      </div>
+    </div>
+  </form>
+

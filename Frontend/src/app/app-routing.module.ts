@@ -5,7 +5,8 @@ import { Routes, RouterModule} from "@angular/router";
 import {WelcomeComponent} from "./welcome/welcome.component";
 import {DoctorComponent} from "./doctor/doctor.component";
 import {SpecialistComponent} from "./specialist/specialist.component";
-import {ViewProfessionalsComponent} from "./view-professionals/view-professionals.component";
+import {ViewDoctorComponent} from "./view-doctor/view-doctor.component";
+import {ViewSpecialistComponent} from "./view-specialist/view-specialist.component";
 
 const routes: Routes = [
   {path : '', component : LoginComponent}, // default path
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path : 'welcome/:name', component : WelcomeComponent},
   {path : 'doctor', component : DoctorComponent},
   {path : 'specialist', component : SpecialistComponent},
-  {path : 'viewProfessionals', component : ViewProfessionalsComponent},
+  {path : 'viewDoctor', component : ViewDoctorComponent},
+  {path : 'viewSpecialist', component : ViewSpecialistComponent}
 ];
 
 @NgModule({

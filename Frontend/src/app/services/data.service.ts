@@ -1,6 +1,7 @@
 import {Injectable, NgModule} from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {Doctor} from "../view-professionals/view-professionals.component";
+import {Specialist} from "../view-specialist/view-specialist.component";
+import {Doctor} from "../view-doctor/view-doctor.component";
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,22 @@ export class DataService {
       });
   }
 
+  deleteSpecialists(specId: any) {
+    console.log(specId);
+    this.http.post('http://localhost:8090/api/deleteSpecialist', specId).subscribe(data=>{
+
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
   retrieveDoctors() {
-    return this.http.get<Doctor[]>(`http://localhost:8090/api/viewProfessional`);
+    return this.http.get<Doctor[]>(`http://localhost:8090/api/viewDoctor`);
+  }
+
+  retrieveSpecialists() {
+    return this.http.get<Specialist[]>(`http://localhost:8090/api/viewSpecialist`);
   }
 }

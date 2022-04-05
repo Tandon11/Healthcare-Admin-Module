@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {DataService} from "../services/data.service";
-import {ViewProfessionalsComponent} from "../view-professionals/view-professionals.component";
+import {ViewDoctorComponent} from "../view-doctor/view-doctor.component";
 
 @Component({
   selector: 'app-welcome',
@@ -26,7 +26,11 @@ export class WelcomeComponent implements OnInit {
       this.router.navigate(['specialist']);
   }
 
-  viewProfessionals() {
-      this.router.navigate(['viewProfessionals']);
+  viewDoctor() {
+      this.router.navigate(['viewDoctor']);
+  }
+
+  viewSpecialist() {
+    this.router.navigate(['viewSpecialist']);
   }
 }

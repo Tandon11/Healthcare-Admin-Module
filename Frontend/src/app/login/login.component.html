@@ -1,29 +1,47 @@
-<h1>Admin Login</h1>
+<!--<div class="container">-->
+<!--  <div class="row">-->
+
+<!--      <form class="alert alert-warning" *ngIf = "invalidLogin">{{errorMessage}}>-->
+<!--        <h2 class="text-center">Login Page</h2>-->
+
+<!--        <br/>-->
+<!--        <div class="form-group">-->
+<!--          Username : <input type = "text" name = "username" [(ngModel)] = "username">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          Password : <input type = "password" name = "password" [(ngModel)] = "password">-->
+<!--        </div>-->
+<!--        <br/>-->
+<!--        <div class="align-center">-->
+<!--          <button (click) = handleLogin() class="btn btn-success">Login</button>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    -->
+<!--  </div>-->
+<!--</div>-->
+
 
 <div class="container">
-  <div class="alert alert-warning" *ngIf = "invalidLogin">{{errorMessage}}</div>
+  <div class="row">
+    <div class="form_bg">
+      <form>
+        <h2 class="text-center">Admin Login</h2>
 
-  <div>
-    Username : <input type = "text" name = "username" [(ngModel)] = "username">
+        <br/>
+        <div class="form-group">
+          <input type="email" class="form-control" id="userid" placeholder="User id" name="something" [(ngModel)] = "username">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="pwd" placeholder="Password" name="something" [(ngModel)] = "password">
+        </div>
+        <br/>
+        <div class="align-center">
+          <button (click) = "handleLogin()" type="button" class="btn btn-success" id="login">Login</button>
+        </div>
+      </form>
+    </div>
   </div>
-
 </div>
 
-<div class="container">
-  <div class="alert alert-warning" *ngIf = "invalidLogin">{{errorMessage}}</div>
 
-  <div>
-    Password : <input type = "password" name = "password" [(ngModel)] = "password">
-  </div>
-
-</div>
-
-<div class="container">
-  <div class="alert alert-warning" *ngIf = "invalidLogin">{{errorMessage}}</div>
-
-  <div>
-    <button (click) = handleLogin() class="btn btn-success">Login</button>
-  </div>
-
-</div>
 

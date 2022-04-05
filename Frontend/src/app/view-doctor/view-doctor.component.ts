@@ -18,11 +18,11 @@ export class Doctor {
 }
 
 @Component({
-  selector: 'app-view-professionals',
-  templateUrl: './view-professionals.component.html',
-  styleUrls: ['./view-professionals.component.css']
+  selector: 'app-view-doctor',
+  templateUrl: './view-doctor.component.html',
+  styleUrls: ['./view-doctor.component.css']
 })
-export class ViewProfessionalsComponent implements OnInit {
+export class ViewDoctorComponent implements OnInit {
 
   doctor: Doctor[] | undefined;
   docId: any = [ ];
@@ -31,28 +31,31 @@ export class ViewProfessionalsComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.retrieveDoctors().subscribe(
-    response=> {
-      this.doctor = response;
-    });
+      response=> {
+        this.doctor = response;
+      });
   }
 
   submitResponses() {
-      console.log(this.docId);
-      this.dataService.deleteDoctors(this.docId);
+    console.log(this.docId);
+    this.dataService.deleteDoctors(this.docId);
   }
 
   pushDocId(doctorId : any){
     console.log(doctorId);
     this.docId.push(doctorId);
-
   }
 
-  //  getDoctorDetails() {
-  //     this.dataService.retrieveDoctors().subscribe(
-  //       response=> {
-  //         this.doctor = response;
-  //       }
-  //     );
-  // }
+  onCheckBoxClick(event: any, doctorId: any) {
+    if(event.checked) {
+      this.docId.push(doctorId);
+    } else {
+      let index = this.docId.indexOf(doctorId);
+      if (index > -1) {
+        this.docId.splice(index, 1);
+      }
+    }
+    console.log(doctorId)
+  }
 
 }
