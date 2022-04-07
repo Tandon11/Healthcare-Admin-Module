@@ -1,7 +1,7 @@
 package com.example.backend.Controller;
 
 import com.example.backend.Models.Doctor;
-import com.example.backend.Response.Reponse;
+import com.example.backend.Response.Response;
 import com.example.backend.Models.Specialist;
 import com.example.backend.Service.Doctor.DoctorService;
 import com.example.backend.Service.Specialist.SpecialistService;
@@ -39,9 +39,9 @@ public class RestApiController {
       }
 
       @RequestMapping(value = "/checkDoctorUsername", method = RequestMethod.GET)
-      public ResponseEntity<Reponse> findDoctorUsername(@RequestHeader String username) {
+      public ResponseEntity<Response> findDoctorUsername(@RequestHeader String username) {
          String searchedUsername =  doctorService.checkDoctorUsername(username);
-         return new ResponseEntity<Reponse>(new Reponse(searchedUsername), HttpStatus.OK);
+         return new ResponseEntity<Response>(new Response(searchedUsername), HttpStatus.OK);
       }
 
       @RequestMapping(value = "/specialist", method = RequestMethod.POST)
