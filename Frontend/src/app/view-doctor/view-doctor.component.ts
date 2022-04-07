@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from "../services/data.service";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 export class Doctor {
   constructor(
@@ -24,38 +25,45 @@ export class Doctor {
 })
 export class ViewDoctorComponent implements OnInit {
 
-  doctor: Doctor[] | undefined;
-  docId: any = [ ];
+      closeResult: string | undefined;
+      doctor: Doctor[] | undefined;
+      docId: any = [ ];
+      display = "none";
 
-  constructor(private dataService: DataService) { }
+      constructor(private dataService: DataService) { }
 
-  ngOnInit(): void {
-    this.dataService.retrieveDoctors().subscribe(
-      response=> {
-        this.doctor = response;
-      });
-  }
+      ngOnInit(): void {
 
-  submitResponses() {
-    console.log(this.docId);
-    this.dataService.deleteDoctors(this.docId);
-  }
-
-  pushDocId(doctorId : any){
-    console.log(doctorId);
-    this.docId.push(doctorId);
-  }
-
-  onCheckBoxClick(event: any, doctorId: any) {
-    if(event.checked) {
-      this.docId.push(doctorId);
-    } else {
-      let index = this.docId.indexOf(doctorId);
-      if (index > -1) {
-        this.docId.splice(index, 1);
+        this.dataService.retrieveDoctors().subscribe(
+          response=> {
+            this.doctor = response;
+          });
       }
-    }
-    console.log(doctorId)
-  }
+
+      openModal() {
+        this.display = "block";
+      }
+      onCloseHandled() {
+        this.display = "none";
+      }
+
+      submitResponses() {
+        console.log(this.docId);
+        this.display = "none";
+        this.dataService.deleteDoctors(this.docId);
+      }
+
+      // Pushes Doctor id upon checking and removes it upon unchecking
+      onCheckBoxClick(event: any, doctorId: any) {
+        if(event.target.checked) {
+          this.docId.push(doctorId);
+        } else {
+          let index = this.docId.indexOf(doctorId);
+          if (index > -1) {
+            this.docId.splice(index, 1);
+          }
+        }
+        console.log(this.docId);
+      }
 
 }

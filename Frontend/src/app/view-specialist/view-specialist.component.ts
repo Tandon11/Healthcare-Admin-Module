@@ -27,6 +27,7 @@ export class ViewSpecialistComponent implements OnInit {
 
   specialist: Specialist[] | undefined;
   specId: any = [ ];
+  display = "none"
 
   constructor(private dataService: DataService) { }
 
@@ -36,6 +37,13 @@ export class ViewSpecialistComponent implements OnInit {
           this.specialist = response;
         }
       );
+  }
+
+  openModal() {
+    this.display = "block";
+  }
+  onCloseHandled() {
+    this.display = "none";
   }
 
   submitResponses() {

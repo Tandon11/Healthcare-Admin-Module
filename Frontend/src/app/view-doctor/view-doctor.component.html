@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             <tr *ngFor = "let doc of doctor">
-              <td><input type = "checkbox" name = "id" id = {{doc.id}} (change)="pushDocId(doc.id)"/></td>
+              <td><input type = "checkbox" name = "id" id = {{doc.id}} (click)="onCheckBoxClick($event, doc.id)"/></td>
               <td>{{doc.id}}</td>
               <td>{{doc.fname}}</td>
               <td>{{doc.lname}}</td>
@@ -33,9 +33,35 @@
             </tbody>
           </table>
 
-          <button (click) = "submitResponses()" class = "btn btn-success"> Delete Selected </button>
+          <button (click) = "openModal()" class = "btn btn-success"> Delete Selected </button>
+
         </div>
       </div>
     </div>
-  </form>
+
+    </form>
+
+ <!-- Popup Window using Bootstrap Modal -->
+ <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+
+       <div class="modal-header">
+         <h4 class="modal-title">Delete Confirmation</h4>
+         <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+       </div>
+
+       <div class="modal-body">
+         <p>Are you sure you want to delete all selected records?</p>
+       </div>
+
+       <div class="modal-footer">
+         <button type="button" class="btn btn-alert" (click)="onCloseHandled()" >Cancel</button>
+         <button type="button" class="btn btn-primary" (click)="submitResponses()" >Submit</button>
+       </div>
+
+     </div>
+   </div>
+ </div>
+
 

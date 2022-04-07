@@ -12,6 +12,7 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { SpecialistComponent } from './specialist/specialist.component';
 import { ViewDoctorComponent } from './view-doctor/view-doctor.component';
 import { ViewSpecialistComponent } from './view-specialist/view-specialist.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ViewSpecialistComponent } from './view-specialist/view-specialist.compo
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
