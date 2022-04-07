@@ -16,4 +16,7 @@ public interface DoctorRepo extends JpaRepository<Doctor, Long> {
     @Transactional
     @Query(nativeQuery = true, value = "DELETE FROM doctor d WHERE d.id IN (:doctorId)")
     void terminateDoctor(List<Integer> doctorId);
+
+    @Query(nativeQuery = true, value = "SELECT d.username FROM doctor d WHERE d.username = :username")
+    String findByUsername(String username);
 }

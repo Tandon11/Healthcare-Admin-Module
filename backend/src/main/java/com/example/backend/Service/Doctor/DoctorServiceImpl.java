@@ -27,4 +27,8 @@ public class DoctorServiceImpl implements DoctorService {
     public List<Doctor> findDoctors() {
        return doctorRepository.findAll();
     }
+
+    public String checkDoctorUsername(String username) {
+        return doctorRepository.findByUsername(username);
+    }
 }

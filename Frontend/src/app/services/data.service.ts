@@ -1,5 +1,5 @@
 import {Injectable, NgModule} from '@angular/core';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {Specialist} from "../view-specialist/view-specialist.component";
 import {Doctor} from "../view-doctor/view-doctor.component";
 
@@ -12,13 +12,29 @@ export class DataService {
 
   saveDoctor(Doctor :any) {
     // Without subscribe() data won't be saved in database
-    this.http.post('http://localhost:8090/api/doctor',Doctor).subscribe(data=>{
-      console.log("Hello");
-      console.log(data);
-    },
-      error => {
-        console.log(error);
-      });
+    let headers = new HttpHeaders();
+    headers = headers.set('username', Doctor.username);
+    this.http.get<String>('http://localhost:8090/api/checkDoctorUsername', { headers: headers }).subscribe(
+      (response:any)=>{
+        console.log("Hello" + response);
+        if(!response.username) {
+          console.log("inside if")
+          this.http.post('http://localhost:8090/api/doctor',Doctor).subscribe(data=>{
+              console.log("Data Sent");
+              console.log(data);
+            },
+            error => {
+            console.log("inside error")
+              console.log(error);
+            });
+        }
+
+        else {
+          console.log("Username Already Exists");
+        }
+      }
+    );
+
   }
 
   saveSpecialist(Specialist :any) {

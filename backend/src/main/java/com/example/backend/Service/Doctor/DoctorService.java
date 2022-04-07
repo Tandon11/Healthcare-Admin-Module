@@ -8,4 +8,5 @@ public interface DoctorService {
     void saveDoctor(Doctor doctor);
     void removeDoctor(Integer[] doctorId);
     List<Doctor> findDoctors();
+    String checkDoctorUsername(String username);
 }
