@@ -1,6 +1,7 @@
 package com.example.backend.Controller;
 
 import com.example.backend.Models.Doctor;
+import com.example.backend.Response.Credentials;
 import com.example.backend.Response.Response;
 import com.example.backend.Models.Specialist;
 import com.example.backend.Service.Doctor.DoctorService;
@@ -90,6 +91,11 @@ public class RestApiController {
       public ResponseEntity<Response> findSpecialistUsername(@RequestHeader String username) {
         String searchedUsername = specialistService.checkSpecialistUsername(username);
         return new ResponseEntity<Response>(new Response(searchedUsername), HttpStatus.OK);
+      }
+
+      @GetMapping("/authenticateLogin")
+      public ResponseEntity<Credentials> authenticateLogin() {
+        return new ResponseEntity<Credentials>(new Credentials(), HttpStatus.OK);
       }
 
 }

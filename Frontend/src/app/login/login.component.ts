@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {HardCodedAuthenticationService} from "../services/hard-coded-authentication.service";
+import {DataService} from "../services/data.service";
+
+export class Credential {
+  constructor(
+    public username: String,
+    public password: String,
+  ) {
+  }
+}
 
 @Component({
   selector: 'app-login',
@@ -10,24 +18,37 @@ import {HardCodedAuthenticationService} from "../services/hard-coded-authenticat
 export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
-              public hardCodedAuthentication: HardCodedAuthenticationService) { }
+              public dataService: DataService) { }
 
-  ngOnInit(): void {
+  credential: Credential | undefined;
+
+  Credentials = {
+    username: "",
+    password: "",
   }
 
-  username = '';
-  password = '';
   errorMessage = 'invalid credentials';
   invalidLogin = false;
 
+  ngOnInit(): void {
+    this.dataService.authenticate().subscribe(
+      response=>{
+        console.log(response);
+        this.credential = response;
+      });
+  }
+
   handleLogin() {
-    if (this.hardCodedAuthentication.authenticate(this.username, this.password)) {
-        this.router.navigate(['welcome', this.username]);
-        this.invalidLogin = false;
-    } else {
+    if(this.credential?.username === this.Credentials.username && this.credential.password === this.Credentials.password){
+      console.log("Authentic Admin");
+      sessionStorage.setItem('authenticatedUser', this.Credentials.username);
+      this.router.navigate(['welcome', this.Credentials.username]);
+      this.invalidLogin = false;
+    }
+    else {
       this.invalidLogin = true;
     }
-
   }
 
 }
+

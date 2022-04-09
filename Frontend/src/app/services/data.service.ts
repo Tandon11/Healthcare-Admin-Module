@@ -2,6 +2,7 @@ import {Injectable, NgModule} from '@angular/core';
 import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {Specialist} from "../view-specialist/view-specialist.component";
 import {Doctor} from "../view-doctor/view-doctor.component";
+import {Credential} from "../login/login.component";
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,19 @@ export class DataService {
 
   retrieveSpecialists() {
     return this.http.get<Specialist[]>(`http://localhost:8090/api/viewSpecialist`);
+  }
+
+  authenticate() {
+    return this.http.get<Credential>('http://localhost:8090/api/authenticateLogin');
+  }
+
+  isUserLoggedIn() {
+    const user = sessionStorage.getItem('authenticatedUser');
+    return !(user === null);
+  }
+
+  logout() {
+    sessionStorage.removeItem('authenticatedUser');
   }
 
 }
