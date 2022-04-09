@@ -1,49 +1,89 @@
+<app-menu></app-menu>
 <form>
   <div class="container">
         <div class = "form-outline mb-4">
           <label class="form-label">First Name</label>
-          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.fname"/>
+          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.fname" name="dummy"/>
         </div>
 
         <div class = "form-outline mb-4">
           <label class="form-label">Last Name</label>
-          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.lname"/>
+          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.lname" name="dummy"/>
         </div>
 
         <div class = "form-outline mb-4">
           <label class="form-label">Username</label>
-          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.username"/>
+          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.username" name="dummy"/>
         </div>
 
         <div class = "form-outline mb-4">
           <label class="form-label">Password</label>
-          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.password"/>
-
+          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.password" name="dummy"/>
         </div>
 
-        <div class = "form-outline mb-4">
-          <label class="form-label">Gender</label>
-          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.gender"/>
+        <div class = "radio-class">
+          <label class="radio">Gender</label>
+          <input class="radio" type = "radio" id = "r1" name = "gender" value = "male" (click) = "genderAssign()"/>
+          <label class="radio">Male</label>
+          <input class="radio" type = "radio" id = "r2" name = "gender" value = "female" (click) = "genderAssign()"/>
+          <label class="radio">Female</label>
+          <input class="radio" type = "radio" id = "r3" name = "gender" value = "others" (click) = "genderAssign()"/>
+          <label class="radio">Others</label>
         </div>
 
         <div class = "form-outline mb-4">
           <label class="form-label">Highest Qualification</label>
-          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.highest_qual"/>
+          <select id="dropdown">
+            <option value="">Select...</option>
+            <option value="Psychiatry" [selected]="assignQualification()">Psychiatry</option>
+            <option value="Neuroradiology" [selected]="assignQualification()">Neuroradiology</option>
+            <option value="Psychiatric Nursing" [selected]="assignQualification()">Psychiatric Nursing</option>
+            <option value="Psychology Counsellor" [selected]="assignQualification()">Psychology Counsellor</option>
+            <option value="Clinical Psychology" [selected]="assignQualification()">Clinical Psychology</option>
+            <option value="Psychiatric Social-Work" [selected]="assignQualification()">Psychiatric Social-Work</option>
+          </select>
         </div>
 
-        <div class = "form-outline mb-4">
-          <label class="form-label">Contact Number</label>
-          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.contact_no"/>
-        </div>
 
         <div class = "form-outline mb-4">
-          <label class="form-label">Available</label>
-          <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.is_Avail"/>
+              <label class="form-label">Contact Number</label>
+              <input class="form-control text-align" type = "text" [(ngModel)] = "Specialist.contact_no" name="dummy"/>
+        </div>
+
+        <div class = "radio-class">
+          <label class="radio"> Available </label>
+          <input class="radio" type = "radio" id = "r4" name = "avail" value = "yes" (click) = "availAssign()"/>
+          <label class="radio">Yes</label>
+          <input class="radio" type = "radio" id = "r5" name = "avail" value = "no" (click) = "availAssign()"/>
+          <label class="radio">No</label>
         </div>
 
         <div class = "align-center">
-          <button (click) = submitDetails() class="btn btn-success">Submit</button>
+              <button (click) = submitDetails() class="btn btn-success">Submit</button>
         </div>
 
-  </div>
+      </div>
 </form>
+
+<!-- Popup Window using Bootstrap Modal -->
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Alert</h4>
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+      </div>
+
+      <div class="modal-body">
+        <p>Username Already Exists !!!</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="okayConfirmation()" >Okay</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+

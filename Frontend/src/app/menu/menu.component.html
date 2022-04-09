@@ -1,0 +1,16 @@
+<header class="text-light">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark bg-opacity-50">
+    <div>
+      <a class="navbar-brand">E-Health Research</a>
+    </div>
+
+    <ul class="navbar-nav">
+      <li><a *ngIf="hardCodedAuthentication.isUserLoggedIn()" routerLink="/welcome/Abhishek" class="nav-link">Home</a></li>
+    </ul>
+
+    <ul class="navbar-nav navbar-collapse justify-content-end">
+      <li><a *ngIf="hardCodedAuthentication.isUserLoggedIn()" routerLink="/logout" class="nav-link">Logout</a></li>
+    </ul>
+
+  </nav>
+</header>

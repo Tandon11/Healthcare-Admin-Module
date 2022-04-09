@@ -9,4 +9,6 @@ public interface SpecialistService {
     void saveSpecialist(Specialist specialist);
     void removeSpecialist(Integer[] specialistId);
     List<Specialist> findSpecialists();
+    String checkSpecialistUsername(String username);
+
 }

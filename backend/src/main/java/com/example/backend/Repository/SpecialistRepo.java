@@ -16,4 +16,7 @@ public interface SpecialistRepo extends JpaRepository<Specialist, Long> {
     @Transactional
     @Query(nativeQuery = true, value = "DELETE FROM specialist s WHERE s.id IN (:specialistId)")
     void terminateSpecialist(List<Integer> specialistId);
+
+    @Query(nativeQuery = true, value = "SELECT s.username FROM specialist s WHERE s.username = :username")
+    String findByUsername(String username);
 }

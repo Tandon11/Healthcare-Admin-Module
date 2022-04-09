@@ -6,8 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.crypto.Cipher;
+import java.security.Key;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
+
+import static org.springframework.cache.interceptor.SimpleKeyGenerator.generateKey;
 
 @Service
 @Transactional
@@ -31,4 +36,5 @@ public class DoctorServiceImpl implements DoctorService {
     public String checkDoctorUsername(String username) {
         return doctorRepository.findByUsername(username);
     }
+
 }

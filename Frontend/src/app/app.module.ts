@@ -13,6 +13,8 @@ import { SpecialistComponent } from './specialist/specialist.component';
 import { ViewDoctorComponent } from './view-doctor/view-doctor.component';
 import { ViewSpecialistComponent } from './view-specialist/view-specialist.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { MenuComponent } from './menu/menu.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     SpecialistComponent,
     ViewDoctorComponent,
     ViewSpecialistComponent,
+    MenuComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

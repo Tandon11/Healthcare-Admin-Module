@@ -31,29 +31,45 @@ export class ViewSpecialistComponent implements OnInit {
 
   constructor(private dataService: DataService) { }
 
-  ngOnInit(): void {
-      this.dataService.retrieveSpecialists().subscribe(
-        response => {
-          this.specialist = response;
+      ngOnInit(): void {
+          this.dataService.retrieveSpecialists().subscribe(
+            response => {
+              this.specialist = response;
+            }
+          );
+      }
+
+      openModal() {
+        this.display = "block";
+      }
+      onCloseHandled() {
+        this.display = "none";
+      }
+
+      submitResponses() {
+        console.log(this.specId);
+        this.display = "none";
+        this.dataService.deleteSpecialists(this.specId).subscribe(
+          response=>{
+            console.log(response);
+            window.location.reload();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+
+      onCheckBoxClick(event: any, specialistId: any) {
+        if(event.target.checked) {
+          this.specId.push(specialistId);
+        } else {
+          let index = this.specId.indexOf(specialistId);
+          if (index > -1) {
+            this.specId.splice(index, 1);
+          }
         }
-      );
-  }
-
-  openModal() {
-    this.display = "block";
-  }
-  onCloseHandled() {
-    this.display = "none";
-  }
-
-  submitResponses() {
-    console.log(this.specId);
-    this.dataService.deleteSpecialists(this.specId)
-  }
-
-  pushSpecId(specialistId : any){
-    console.log(specialistId);
-    this.specId.push(specialistId);
-  }
+        console.log(this.specId);
+      }
 
 }

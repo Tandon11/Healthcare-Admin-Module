@@ -28,23 +28,16 @@ public class RestApiController {
       @Autowired
       SpecialistService specialistService;
 
-      @RequestMapping(value = "/doctor", method = RequestMethod.POST)
+      @PostMapping("/doctor")
       public ResponseEntity<?> createDoctor(@RequestBody Doctor doctor, UriComponentsBuilder ucBuilder) {
           doctorService.saveDoctor(doctor);
 
           HttpHeaders headers = new HttpHeaders();
           headers.setLocation(ucBuilder.path("/api/doctor/{id}").buildAndExpand(doctor.getId()).toUri());
           return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-
       }
 
-      @RequestMapping(value = "/checkDoctorUsername", method = RequestMethod.GET)
-      public ResponseEntity<Response> findDoctorUsername(@RequestHeader String username) {
-         String searchedUsername =  doctorService.checkDoctorUsername(username);
-         return new ResponseEntity<Response>(new Response(searchedUsername), HttpStatus.OK);
-      }
-
-      @RequestMapping(value = "/specialist", method = RequestMethod.POST)
+      @PostMapping("/specialist")
       public ResponseEntity<?> createSpecialist(@RequestBody Specialist specialist, UriComponentsBuilder ucBuilder) {
           specialistService.saveSpecialist(specialist);
 
@@ -53,7 +46,7 @@ public class RestApiController {
           return new ResponseEntity<String>(headers, HttpStatus.CREATED);
       }
 
-      @RequestMapping(value = "/deleteDoctor", method = RequestMethod.POST)
+      @PostMapping("/deleteDoctor")
       public ResponseEntity<?> deleteDoctor(@RequestBody Integer[] doctorId, UriComponentsBuilder ucBuilder) {
           System.out.println("In Rest API Controller");
           doctorService.removeDoctor(doctorId);
@@ -63,14 +56,7 @@ public class RestApiController {
           return new ResponseEntity<String>(headers, HttpStatus.CREATED);
       }
 
-      @RequestMapping(value = "/viewDoctor", method = RequestMethod.GET)
-      public  ResponseEntity<List<Doctor>> getAllDoctors() {
-          System.out.println("Inside /viewProfessional");
-          List<Doctor> doctors = doctorService.findDoctors();
-          return new ResponseEntity<List<Doctor>>(doctors, HttpStatus.OK);
-      }
-
-      @RequestMapping(value = "/deleteSpecialist", method = RequestMethod.POST)
+      @PostMapping("/deleteSpecialist")
       public ResponseEntity<?> deleteSpecialist(@RequestBody Integer[] specialistId, UriComponentsBuilder ucBuilder) {
         System.out.println("In Rest API Controller");
         specialistService.removeSpecialist(specialistId);
@@ -80,11 +66,30 @@ public class RestApiController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
       }
 
-      @RequestMapping(value = "/viewSpecialist", method = RequestMethod.GET)
+      @GetMapping("/viewDoctor")
+      public  ResponseEntity<List<Doctor>> getAllDoctors() {
+        System.out.println("Inside /viewProfessional");
+        List<Doctor> doctors = doctorService.findDoctors();
+        return new ResponseEntity<List<Doctor>>(doctors, HttpStatus.OK);
+      }
+
+      @GetMapping("/viewSpecialist")
       public  ResponseEntity<List<Specialist>> getAllSpecialists() {
         System.out.println("Inside /viewProfessional");
         List<Specialist> specialists = specialistService.findSpecialists();
         return new ResponseEntity<List<Specialist>>(specialists, HttpStatus.OK);
+      }
+
+      @GetMapping("/checkDoctorUsername")
+      public ResponseEntity<Response> findDoctorUsername(@RequestHeader String username) {
+        String searchedUsername =  doctorService.checkDoctorUsername(username);
+        return new ResponseEntity<Response>(new Response(searchedUsername), HttpStatus.OK);
+      }
+
+      @GetMapping("/checkSpecialistUsername")
+      public ResponseEntity<Response> findSpecialistUsername(@RequestHeader String username) {
+        String searchedUsername = specialistService.checkSpecialistUsername(username);
+        return new ResponseEntity<Response>(new Response(searchedUsername), HttpStatus.OK);
       }
 
 }

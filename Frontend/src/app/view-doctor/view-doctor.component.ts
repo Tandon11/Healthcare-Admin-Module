@@ -25,7 +25,6 @@ export class Doctor {
 })
 export class ViewDoctorComponent implements OnInit {
 
-      closeResult: string | undefined;
       doctor: Doctor[] | undefined;
       docId: any = [ ];
       display = "none";
@@ -33,7 +32,6 @@ export class ViewDoctorComponent implements OnInit {
       constructor(private dataService: DataService) { }
 
       ngOnInit(): void {
-
         this.dataService.retrieveDoctors().subscribe(
           response=> {
             this.doctor = response;
@@ -50,7 +48,15 @@ export class ViewDoctorComponent implements OnInit {
       submitResponses() {
         console.log(this.docId);
         this.display = "none";
-        this.dataService.deleteDoctors(this.docId);
+        this.dataService.deleteDoctors(this.docId).subscribe(
+          response=>{
+            console.log(response);
+            window.location.reload();
+          },
+          error => {
+            console.log(error);
+          }
+        );
       }
 
       // Pushes Doctor id upon checking and removes it upon unchecking

@@ -10,62 +10,34 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  saveDoctor(Doctor :any) {
-    // Without subscribe() data won't be saved in database
+  checkDoctor(Doctor:any){
     let headers = new HttpHeaders();
     headers = headers.set('username', Doctor.username);
-    this.http.get<String>('http://localhost:8090/api/checkDoctorUsername', { headers: headers }).subscribe(
-      (response:any)=>{
-        console.log("Hello" + response);
-        if(!response.username) {
-          console.log("inside if")
-          this.http.post('http://localhost:8090/api/doctor',Doctor).subscribe(data=>{
-              console.log("Data Sent");
-              console.log(data);
-            },
-            error => {
-            console.log("inside error")
-              console.log(error);
-            });
-        }
+    return this.http.get<String>('http://localhost:8090/api/checkDoctorUsername', { headers: headers })
+  }
 
-        else {
-          console.log("Username Already Exists");
-        }
-      }
-    );
+  saveDoctor(Doctor:any){
+    return this.http.post('http://localhost:8090/api/doctor',Doctor)
+  }
 
+  checkSpecialist(Specialist: any) {
+    let headers = new HttpHeaders();
+    headers = headers.set('username', Specialist.username);
+    return this.http.get<String>('http://localhost:8090/api/checkSpecialistUsername', { headers: headers })
   }
 
   saveSpecialist(Specialist :any) {
-    this.http.post('http://localhost:8090/api/specialist',Specialist).subscribe(data=>{
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-      });
+   return this.http.post('http://localhost:8090/api/specialist',Specialist);
   }
 
   deleteDoctors(docId: any) {
     console.log(docId);
-    this.http.post('http://localhost:8090/api/deleteDoctor', docId).subscribe(data=>{
-
-      console.log(data);
-      },
-      error => {
-        console.log(error);
-      });
+    return this.http.post('http://localhost:8090/api/deleteDoctor', docId);
   }
 
   deleteSpecialists(specId: any) {
     console.log(specId);
-    this.http.post('http://localhost:8090/api/deleteSpecialist', specId).subscribe(data=>{
-
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-      });
+    return this.http.post('http://localhost:8090/api/deleteSpecialist', specId);
   }
 
   retrieveDoctors() {
@@ -75,4 +47,5 @@ export class DataService {
   retrieveSpecialists() {
     return this.http.get<Specialist[]>(`http://localhost:8090/api/viewSpecialist`);
   }
+
 }

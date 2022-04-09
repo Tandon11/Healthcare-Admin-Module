@@ -28,4 +28,8 @@ public class SpecialistServiceImpl implements SpecialistService {
     public List<Specialist> findSpecialists() {
       return specialistRepository.findAll();
     }
+
+    public String checkSpecialistUsername(String username) {
+      return specialistRepository.findByUsername(username);
+    }
 }
